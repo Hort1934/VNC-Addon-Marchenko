@@ -1,0 +1,46 @@
+{
+  "name": "vnc-addon-marchenko",
+  "version": "1.0.0",
+  "description": "High-performance native Node.js VNC server addon with DXGI screen capture and noVNC support",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": ["vnc", "server", "desktop", "screen-capture", "dxgi", "novnc", "websocket", "native-addon"],
+  "author": "Ihor Marchenko",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "os": ["win32"],
+  "cpu": ["x64"],
+  "scripts": {
+    "prebuild": "node-gyp clean || echo 'Clean complete'",
+    "build": "npm run build:native && npm run build:ts",
+    "build:native": "node-gyp rebuild",
+    "build:ts": "tsc",
+    "build:ts-only": "tsc",
+    "clean": "rimraf dist build && node-gyp clean",
+    "test": "node dist/test.js",
+    "test:mock": "npm run build:ts-only && node dist/mock-test.js",
+    "example": "node dist/example.js",
+    "example:mock": "npm run build:ts-only && node dist/mock-example.js",
+    "demo": "npm run example:mock",
+    "prepare": "npm run build || npm run build:ts-only"
+  },
+  "dependencies": {
+    "node-addon-api": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0",
+    "rimraf": "^5.0.5",
+    "node-gyp": "^10.0.1"
+  },
+  "gypfile": true,
+  "binary": {
+    "napi_versions": [8]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hort1934/VNC-Addon-Marchenko.git"
+  }
+}
